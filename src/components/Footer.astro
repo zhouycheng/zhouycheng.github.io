@@ -1,0 +1,26 @@
+---
+import { SITE_AUTHOR } from '../consts';
+
+const today = new Date();
+---
+
+<footer>
+	<p>&copy; {today.getFullYear()} {SITE_AUTHOR}. Built with Astro and GitHub Pages.</p>
+	<p class="quiet">写作慢一点也没关系，重要的是把真实想法留下来。</p>
+</footer>
+<style>
+	footer {
+		width: min(920px, calc(100% - 2rem));
+		margin: 0 auto;
+		padding: 4rem 0 5rem;
+		border-top: 1px solid var(--line);
+		color: var(--muted);
+		font-size: 0.9rem;
+	}
+	p {
+		margin: 0.3rem 0;
+	}
+	.quiet {
+		color: var(--faint);
+	}
+</style>

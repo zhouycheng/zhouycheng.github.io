@@ -1,0 +1,78 @@
+---
+import { GITHUB_URL, SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header class="site-header">
+	<nav>
+		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<div class="internal-links">
+			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/archive">Archive</HeaderLink>
+			<HeaderLink href="/notes">Notes</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+		</div>
+		<a class="external-link" href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
+	</nav>
+</header>
+<style>
+	header {
+		border-bottom: 1px solid var(--line);
+		background: color-mix(in srgb, var(--paper) 88%, transparent);
+		backdrop-filter: blur(18px);
+		position: sticky;
+		top: 0;
+		z-index: 20;
+	}
+	h2 {
+		margin: 0;
+		font-size: 0.92rem;
+		letter-spacing: 0;
+	}
+
+	h2 a,
+	h2 a.active {
+		color: var(--ink);
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		width: min(920px, calc(100% - 2rem));
+		margin: 0 auto;
+		padding: 1rem 0;
+	}
+	nav a {
+		color: var(--muted);
+		text-decoration: none;
+		text-underline-offset: 0.22em;
+	}
+	nav a.active {
+		color: var(--ink);
+		text-decoration: none;
+		box-shadow: inset 0 -0.45em 0 var(--accent-soft);
+	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		font-size: 0.88rem;
+	}
+	.external-link {
+		font-size: 0.88rem;
+	}
+	@media (max-width: 720px) {
+		nav {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+		.internal-links {
+			width: 100%;
+			gap: 0.9rem;
+			overflow-x: auto;
+			padding-bottom: 0.1rem;
+		}
+	}
+</style>

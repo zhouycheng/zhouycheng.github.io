@@ -1,0 +1,314 @@
+:root {
+	--paper: #fbfbf7;
+	--paper-alt: #f1f4ef;
+	--ink: #27231f;
+	--muted: #6b6259;
+	--faint: #958a7f;
+	--line: #ded8cf;
+	--accent: #9a3f33;
+	--accent-soft: #ead3ce;
+	--green: #4f6f52;
+	--code-bg: #eeebe4;
+	--shadow: 0 18px 50px rgba(39, 35, 31, 0.08);
+}
+
+@font-face {
+	font-family: "Atkinson Local";
+	src: url("../assets/fonts/atkinson-regular.woff") format("woff");
+	font-display: swap;
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Atkinson Local";
+	src: url("../assets/fonts/atkinson-bold.woff") format("woff");
+	font-display: swap;
+	font-weight: 700;
+	font-style: normal;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--paper);
+	color: var(--ink);
+}
+
+body {
+	font-family:
+		"Atkinson Local", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	background:
+		linear-gradient(90deg, rgba(154, 63, 51, 0.05) 1px, transparent 1px),
+		linear-gradient(0deg, rgba(79, 111, 82, 0.04) 1px, transparent 1px),
+		var(--paper);
+	background-size: 42px 42px;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	color: var(--ink);
+	font-size: 18px;
+	line-height: 1.78;
+}
+
+main {
+	width: min(920px, calc(100% - 2rem));
+	margin: auto;
+	padding: 4rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+	margin: 0 0 0.6rem;
+	color: var(--ink);
+	font-weight: 700;
+	line-height: 1.22;
+	letter-spacing: 0;
+}
+
+h1 {
+	font-size: clamp(2.2rem, 6vw, 5.2rem);
+}
+
+h2 {
+	font-size: clamp(1.55rem, 3vw, 2.35rem);
+}
+
+h3 {
+	font-size: 1.35rem;
+}
+
+a {
+	color: var(--accent);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.22em;
+}
+
+a:hover {
+	color: var(--green);
+}
+
+p {
+	margin: 0 0 1.1rem;
+}
+
+strong,
+b {
+	font-weight: 700;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+
+code {
+	padding: 0.12rem 0.34rem;
+	background-color: var(--code-bg);
+	border-radius: 4px;
+	font-size: 0.92em;
+}
+
+pre {
+	padding: 1.25rem;
+	border: 1px solid var(--line);
+	border-radius: 8px;
+	background: #22201d;
+	box-shadow: var(--shadow);
+	overflow-x: auto;
+}
+
+pre > code {
+	all: unset;
+	color: #f8f3e9;
+}
+
+blockquote {
+	border-left: 3px solid var(--accent);
+	padding: 0.2rem 0 0.2rem 1.1rem;
+	margin: 1.8rem 0;
+	color: var(--muted);
+	font-family: "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+	font-size: 1.12rem;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid var(--line);
+	margin: 2rem 0;
+}
+
+.eyebrow {
+	color: var(--accent);
+	font-size: 0.82rem;
+	font-weight: 700;
+	letter-spacing: 0;
+	text-transform: uppercase;
+}
+
+.muted {
+	color: var(--muted);
+}
+
+.page-intro {
+	max-width: 720px;
+}
+
+.home-hero {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 220px;
+	gap: 3rem;
+	align-items: end;
+	padding: 2.5rem 0 5rem;
+}
+
+.hero-mark {
+	border-left: 2px solid var(--accent);
+	padding-left: 1rem;
+	color: var(--muted);
+	font-size: 0.95rem;
+}
+
+.section-heading {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	margin: 3rem 0 1.2rem;
+	border-bottom: 1px solid var(--line);
+}
+
+.section-heading h2 {
+	font-size: 1.15rem;
+	font-family:
+		"Atkinson Local", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+.section-heading a {
+	font-size: 0.9rem;
+}
+
+.writing-list {
+	display: grid;
+	gap: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.writing-item {
+	display: grid;
+	grid-template-columns: 10rem minmax(0, 1fr);
+	gap: 1.5rem;
+	padding: 1.25rem 0;
+	border-bottom: 1px solid var(--line);
+}
+
+.writing-item time,
+.writing-meta {
+	color: var(--faint);
+	font-size: 0.88rem;
+}
+
+.writing-title {
+	margin: 0 0 0.35rem;
+	font-family:
+		"Atkinson Local", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	font-size: 1.08rem;
+	line-height: 1.45;
+}
+
+.writing-title a {
+	color: var(--ink);
+	text-decoration: none;
+}
+
+.writing-title a:hover {
+	color: var(--accent);
+}
+
+.writing-description {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.98rem;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	margin-top: 0.65rem;
+}
+
+.tag {
+	color: var(--green);
+	font-size: 0.78rem;
+}
+
+.note-list .writing-item {
+	grid-template-columns: 8rem minmax(0, 1fr);
+}
+
+.prose {
+	max-width: 720px;
+	margin: 0 auto;
+}
+
+.prose p,
+.prose li {
+	color: var(--ink);
+}
+
+.prose p {
+	margin-bottom: 1.4rem;
+}
+
+.prose ul,
+.prose ol {
+	padding-left: 1.4rem;
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+	body {
+		font-size: 17px;
+	}
+
+	main {
+		padding: 2.2rem 0;
+	}
+
+	.home-hero {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+		padding: 1.5rem 0 3rem;
+	}
+
+	.writing-item,
+	.note-list .writing-item {
+		grid-template-columns: 1fr;
+		gap: 0.35rem;
+	}
+}
