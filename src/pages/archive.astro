@@ -21,17 +21,12 @@ const groupedPosts = posts.reduce<Record<string, typeof posts>>((groups, post) =
 <!doctype html>
 <html lang="zh-CN">
 	<head>
-		<BaseHead title={`归档 | ${SITE_TITLE}`} description="按年份整理的文章归档。" />
+		<BaseHead title={`Archive | ${SITE_TITLE}`} description="按年份整理的文章归档。" />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<section class="page-intro">
-				<p class="eyebrow">Archive</p>
-				<h1>归档</h1>
-				<p class="muted">文章按发布时间倒序排列。短想法会单独放在 Notes。</p>
-			</section>
-
+			<p class="eyebrow">ARCHIVE</p>
 			{
 				Object.entries(groupedPosts)
 					.sort(([a], [b]) => Number(b) - Number(a))

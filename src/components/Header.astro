@@ -1,5 +1,5 @@
 ---
-import { GITHUB_URL, SITE_TITLE } from '../consts';
+import { SITE_TITLE } from '../consts';
 import HeaderLink from './HeaderLink.astro';
 ---
 
@@ -9,10 +9,7 @@ import HeaderLink from './HeaderLink.astro';
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/archive">Archive</HeaderLink>
-			<HeaderLink href="/notes">Notes</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
 		</div>
-		<a class="external-link" href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
 	</nav>
 </header>
 <style>
@@ -58,9 +55,6 @@ import HeaderLink from './HeaderLink.astro';
 		display: flex;
 		align-items: center;
 		gap: 1rem;
-		font-size: 0.88rem;
-	}
-	.external-link {
 		font-size: 0.88rem;
 	}
 	@media (max-width: 720px) {

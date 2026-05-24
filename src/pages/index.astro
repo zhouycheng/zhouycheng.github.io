@@ -10,8 +10,7 @@ const entries = (await getCollection('blog'))
 	.filter((entry) => !entry.data.draft)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const posts = entries.filter((entry) => entry.data.kind === 'post').slice(0, 6);
-const notes = entries.filter((entry) => entry.data.kind === 'note').slice(0, 4);
+const posts = entries.filter((entry) => entry.data.kind === 'post');
 ---
 
 <!doctype html>
@@ -22,69 +21,29 @@ const notes = entries.filter((entry) => entry.data.kind === 'note').slice(0, 4);
 	<body>
 		<Header />
 		<main>
-			<section class="home-hero">
-				<div>
-					<p class="eyebrow">Personal logbook</p>
-					<h1>把阶段性的想法留下来。</h1>
-					<p class="page-intro muted">
-						这里会放一些个人日志、技术手记、项目复盘和学习过程里的判断。它和个人网站分开维护，只负责写作和沉淀。
-					</p>
-				</div>
-				<p class="hero-mark">
-					慢慢写，按时间归档。能公开的写成文章，暂时还没长成文章的先放在 Notes。
-				</p>
-			</section>
-
-			<section>
-				<div class="section-heading">
-					<h2>最近文章</h2>
-					<a href="/archive/">全部归档</a>
-				</div>
-				<ul class="writing-list">
-					{
-						posts.map((post) => (
-							<li class="writing-item">
-								<FormattedDate date={post.data.pubDate} />
-								<div>
-									<h3 class="writing-title">
-										<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-									</h3>
-									<p class="writing-description">{post.data.description}</p>
-									{post.data.tags.length > 0 && (
-										<div class="tags">
-											{post.data.tags.map((tag) => (
-												<span class="tag">#{tag}</span>
-											))}
-										</div>
-									)}
-								</div>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-
-			<section>
-				<div class="section-heading">
-					<h2>短记</h2>
-					<a href="/notes/">更多 Notes</a>
-				</div>
-				<ul class="writing-list note-list">
-					{
-						notes.map((note) => (
-							<li class="writing-item">
-								<FormattedDate date={note.data.pubDate} />
-								<div>
-									<h3 class="writing-title">
-										<a href={`/blog/${note.id}/`}>{note.data.title}</a>
-									</h3>
-									<p class="writing-description">{note.data.description}</p>
-								</div>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+			<p class="eyebrow">PERSONAL LOGBOOK</p>
+			<ul class="writing-list">
+				{
+					posts.map((post) => (
+						<li class="writing-item">
+							<FormattedDate date={post.data.pubDate} />
+							<div>
+								<h3 class="writing-title">
+									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+								</h3>
+								<p class="writing-description">{post.data.description}</p>
+								{post.data.tags.length > 0 && (
+									<div class="tags">
+										{post.data.tags.map((tag) => (
+											<span class="tag">#{tag}</span>
+										))}
+									</div>
+								)}
+							</div>
+						</li>
+					))
+				}
+			</ul>
 		</main>
 		<Footer />
 	</body>

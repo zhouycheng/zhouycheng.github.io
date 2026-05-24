@@ -58,7 +58,7 @@ body {
 main {
 	width: min(920px, calc(100% - 2rem));
 	margin: auto;
-	padding: 4rem 0;
+	padding: 2rem 0 6rem;
 }
 
 h1,

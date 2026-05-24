@@ -5,22 +5,24 @@ const today = new Date();
 ---
 
 <footer>
-	<p>&copy; {today.getFullYear()} {SITE_AUTHOR}. Built with Astro and GitHub Pages.</p>
-	<p class="quiet">写作慢一点也没关系，重要的是把真实想法留下来。</p>
+	<p>&copy; {today.getFullYear()} {SITE_AUTHOR}</p>
 </footer>
 <style>
 	footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
 		width: min(920px, calc(100% - 2rem));
 		margin: 0 auto;
-		padding: 4rem 0 5rem;
+		padding: 1rem 0;
 		border-top: 1px solid var(--line);
+		background: color-mix(in srgb, var(--paper) 95%, transparent);
+		backdrop-filter: blur(8px);
 		color: var(--muted);
 		font-size: 0.9rem;
 	}
 	p {
-		margin: 0.3rem 0;
-	}
-	.quiet {
-		color: var(--faint);
+		margin: 0;
 	}
 </style>
