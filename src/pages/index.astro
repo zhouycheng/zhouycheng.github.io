@@ -10,7 +10,7 @@ const entries = (await getCollection('blog'))
 	.filter((entry) => !entry.data.draft)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const posts = entries.filter((entry) => entry.data.kind === 'post');
+const articles = entries.filter((entry) => entry.data.kind === 'article');
 ---
 
 <!doctype html>
@@ -21,10 +21,10 @@ const posts = entries.filter((entry) => entry.data.kind === 'post');
 	<body>
 		<Header />
 		<main>
-			<p class="eyebrow">PERSONAL LOGBOOK</p>
+			<p class="eyebrow">ARTICLES</p>
 			<ul class="writing-list">
 				{
-					posts.map((post) => (
+					articles.map((post) => (
 						<li class="writing-item">
 							<FormattedDate date={post.data.pubDate} />
 							<div>

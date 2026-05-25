@@ -7,7 +7,7 @@ import Header from '../components/Header.astro';
 import { SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog'))
-	.filter((entry) => !entry.data.draft && entry.data.kind === 'post')
+	.filter((entry) => !entry.data.draft && entry.data.kind === 'article')
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const groupedPosts = posts.reduce<Record<string, typeof posts>>((groups, post) => {

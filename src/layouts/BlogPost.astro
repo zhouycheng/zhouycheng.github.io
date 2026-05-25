@@ -8,7 +8,9 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, tags = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags = [], kind } = Astro.props;
+const backHref = kind === 'log' ? '/logs/' : '/';
+const backLabel = kind === 'log' ? '返回日志' : '返回文章';
 ---
 
 <html lang="zh-CN">
@@ -98,7 +100,7 @@ const { title, description, pubDate, updatedDate, heroImage, tags = [] } = Astro
 						}
 					</div>
 					<slot />
-					<a class="back-link" href="/archive/">返回归档</a>
+					<a class="back-link" href={backHref}>{backLabel}</a>
 				</div>
 			</article>
 		</main>
