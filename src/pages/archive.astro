@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import SiteShell from '../components/SiteShell.astro';
 import { SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog'))
@@ -24,8 +23,7 @@ const groupedPosts = posts.reduce<Record<string, typeof posts>>((groups, post) =
 		<BaseHead title={`Archive | ${SITE_TITLE}`} description="按年份整理的文章归档。" />
 	</head>
 	<body>
-		<Header />
-		<main>
+		<SiteShell>
 			<p class="eyebrow">ARCHIVE</p>
 			{
 				Object.entries(groupedPosts)
@@ -44,7 +42,6 @@ const groupedPosts = posts.reduce<Record<string, typeof posts>>((groups, post) =
 											<h3 class="writing-title">
 												<a href={`/blog/${post.id}/`}>{post.data.title}</a>
 											</h3>
-											<p class="writing-description">{post.data.description}</p>
 										</div>
 									</li>
 								))}
@@ -52,7 +49,6 @@ const groupedPosts = posts.reduce<Record<string, typeof posts>>((groups, post) =
 						</section>
 					))
 			}
-		</main>
-		<Footer />
+		</SiteShell>
 	</body>
 </html>

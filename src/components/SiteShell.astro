@@ -1,0 +1,28 @@
+---
+import { SITE_AUTHOR, SITE_TITLE } from '../consts';
+
+interface Props {
+	class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+const shellClass = ['site-shell', className].filter(Boolean).join(' ');
+---
+
+<main class={shellClass}>
+	<section class="site-main">
+		<slot />
+	</section>
+	<aside class="site-rail" aria-label="站点信息">
+		<div class="site-rail-mark">
+			<p class="site-rail-title">找到属于自己的节奏</p>
+			<p class="site-rail-name">{SITE_TITLE}</p>
+		</div>
+		<nav class="site-rail-nav" aria-label="主要导航">
+			<a href="/">Home</a>
+			<a href="/archive/">Archive</a>
+			<a href="/logs/">Logs</a>
+		</nav>
+		<p class="site-rail-credit">&copy; {new Date().getFullYear()} {SITE_AUTHOR}</p>
+	</aside>
+</main>

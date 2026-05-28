@@ -1,9 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import SiteShell from '../components/SiteShell.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 const entries = (await getCollection('blog'))
@@ -18,33 +17,26 @@ const articles = entries.filter((entry) => entry.data.kind === 'article');
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
-		<Header />
-		<main>
-			<p class="eyebrow">ARTICLES</p>
-			<ul class="writing-list">
-				{
-					articles.map((post) => (
-						<li class="writing-item">
-							<FormattedDate date={post.data.pubDate} />
-							<div>
-								<h3 class="writing-title">
+	<body class="home-page">
+		<SiteShell class="home-shell">
+			<section class="home-feed" aria-labelledby="home-feed-title">
+				<p class="eyebrow" id="home-feed-title">ARTICLES</p>
+				<ul class="home-writing-list">
+					{
+						articles.map((post) => (
+							<li class="home-writing-item">
+								<h2 class="home-post-title writing-title">
 									<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-								</h3>
-								<p class="writing-description">{post.data.description}</p>
-								{post.data.tags.length > 0 && (
-									<div class="tags">
-										{post.data.tags.map((tag) => (
-											<span class="tag">#{tag}</span>
-										))}
-									</div>
-								)}
-							</div>
-						</li>
-					))
-				}
-			</ul>
-		</main>
-		<Footer />
+									{post.data.description && (
+										<span class="description-popover">{post.data.description}</span>
+									)}
+								</h2>
+								<p class="home-post-date">Date · <FormattedDate date={post.data.pubDate} /></p>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</SiteShell>
 	</body>
 </html>

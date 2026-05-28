@@ -25,6 +25,20 @@ http://localhost:4321
 src/content/blog/
 ```
 
+文件名必须使用 `YYYYMMDD-title.md` 格式，例如：
+
+```text
+src/content/blog/20260524-my-first-post.md
+```
+
+也可以用脚本生成：
+
+```bash
+npm run new
+```
+
+脚本会要求输入标题、摘要、日期和类型。摘要会写入页面元信息，供搜索引擎和分享卡片读取。
+
 文章模板：
 
 ```md
@@ -33,8 +47,7 @@ title: 标题
 description: 简短摘要
 pubDate: 2026-05-24
 kind: article
-tags:
-  - 日志
+draft: false
 ---
 
 正文内容。
@@ -48,8 +61,7 @@ title: 标题
 description: 简短摘要
 pubDate: 2026-05-24
 kind: log
-tags:
-  - 日志
+draft: false
 ---
 
 日志内容。
@@ -65,6 +77,12 @@ npm run build
 
 ```text
 dist/
+```
+
+构建时会生成 `sitemap-index.xml`，`public/robots.txt` 会被复制到 `dist/robots.txt`。发布后可以在 Google Search Console 里提交：
+
+```text
+https://zhouycheng.github.io/sitemap-index.xml
 ```
 
 ## 部署

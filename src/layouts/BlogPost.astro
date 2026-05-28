@@ -2,29 +2,45 @@
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import SiteShell from '../components/SiteShell.astro';
+import { SITE_AUTHOR, SITE_TITLE } from '../consts';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, tags = [], kind } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, kind } = Astro.props;
 const backHref = kind === 'log' ? '/logs/' : '/';
 const backLabel = kind === 'log' ? '返回日志' : '返回文章';
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const imageURL = heroImage ? new URL(heroImage.src, Astro.site).toString() : undefined;
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	datePublished: pubDate.toISOString(),
+	dateModified: (updatedDate ?? pubDate).toISOString(),
+	mainEntityOfPage: canonicalURL.toString(),
+	author: {
+		'@type': 'Person',
+		name: SITE_AUTHOR,
+	},
+	publisher: {
+		'@type': 'Organization',
+		name: SITE_TITLE,
+	},
+	image: imageURL ? [imageURL] : undefined,
+};
+const structuredDataJSON = JSON.stringify(structuredData).replace(/</g, '\\u003c');
 ---
 
 <html lang="zh-CN">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={heroImage} type="article" />
+		<script type="application/ld+json" set:html={structuredDataJSON} />
 		<style>
-			main {
-				width: min(920px, calc(100% - 2rem));
-				margin: auto;
-				padding: 3.5rem 0;
-			}
 			.hero-image {
-				max-width: 920px;
-				margin: 0 auto 2.5rem;
+				margin: 0 0 2.5rem;
 			}
 			.hero-image img {
 				display: block;
@@ -35,26 +51,25 @@ const backLabel = kind === 'log' ? '返回日志' : '返回文章';
 			.prose {
 				max-width: 720px;
 			}
-			.title {
+			.post-header {
 				margin-bottom: 2.5rem;
-				padding-bottom: 1.5rem;
-				border-bottom: 1px solid var(--line);
 			}
-			.title h1 {
-				margin: 0.4rem 0 0.6rem;
-				font-size: clamp(2.1rem, 6vw, 4.2rem);
+			.post-header h1 {
+				display: inline;
+				margin: 0;
+				font-family:
+					"Atkinson Local", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+				font-size: clamp(2rem, 5vw, 3.6rem);
+				line-height: 1.18;
+				text-decoration-line: underline;
+				text-decoration-thickness: 2px;
+				text-decoration-color: var(--ink);
+				text-underline-offset: 0.12em;
 			}
-			.date {
+			.post-date {
+				margin: 1rem 0 0;
 				color: var(--faint);
 				font-size: 0.92rem;
-			}
-			.last-updated-on {
-				color: var(--muted);
-				margin-top: 0.25rem;
-			}
-			.description {
-				max-width: 620px;
-				color: var(--muted);
 			}
 			.back-link {
 				display: inline-block;
@@ -65,45 +80,34 @@ const backLabel = kind === 'log' ? '返回日志' : '返回文章';
 			.back-link:hover {
 				color: var(--accent);
 			}
-		</style>
+
+		@media (max-width: 720px) {
+			.post-shell .site-rail {
+				display: none;
+			}
+		}
+	</style>
 	</head>
 
 	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										更新于 <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
+		<SiteShell class="post-shell">
+			<article class="post-article">
+				{
+					heroImage && (
+						<div class="hero-image">
+							<Image width={1020} height={510} src={heroImage} alt="" />
 						</div>
+					)
+				}
+				<div class="prose">
+					<header class="post-header">
 						<h1>{title}</h1>
-						<p class="description">{description}</p>
-						{
-							tags.length > 0 && (
-								<div class="tags">
-									{tags.map((tag) => (
-										<span class="tag">#{tag}</span>
-									))}
-								</div>
-							)
-						}
-					</div>
+						<p class="post-date">Date · <FormattedDate date={pubDate} /></p>
+					</header>
 					<slot />
 					<a class="back-link" href={backHref}>{backLabel}</a>
 				</div>
 			</article>
-		</main>
-		<Footer />
+		</SiteShell>
 	</body>
 </html>
