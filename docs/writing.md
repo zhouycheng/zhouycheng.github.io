@@ -1,6 +1,6 @@
 # 写作与发布说明
 
-这个仓库的文章和日志都放在：
+这个仓库的文章都放在：
 
 ```text
 src/content/blog/
@@ -24,7 +24,7 @@ src/content/blog/20260526-my-first-post.md
 npm run new
 ```
 
-脚本会要求输入标题、摘要、日期和类型。日期可以留空，留空时使用今天；也可以输入 `YYYYMMDD`、`YYMMDD`、`MMDD`、`DD` 或 `D`，没有填写的部分会使用当前日期信息补齐。
+脚本会要求输入标题、摘要和日期。日期可以留空，留空时使用今天；也可以输入 `YYYYMMDD`、`YYMMDD`、`MMDD`、`DD` 或 `D`，没有填写的部分会使用当前日期信息补齐。
 
 ## Frontmatter
 
@@ -35,7 +35,6 @@ npm run new
 title: 标题
 description: 简短摘要
 pubDate: 2026-05-26
-kind: article
 draft: false
 ---
 ```
@@ -45,25 +44,16 @@ draft: false
 - `title`：文章标题。
 - `description`：首页提示和页面元信息使用的简短摘要，也会影响搜索结果里的摘要展示。
 - `pubDate`：发布日期。
-- `kind`：写 `article` 会出现在首页和归档页；写 `log` 会出现在日志页。
 - `draft`：写 `true` 时表示草稿，不会出现在列表里。
 
 `draft: true` 的内容也不会生成独立文章页，避免草稿被 sitemap 或搜索引擎收录。
 
 ## 写文章
 
-如果以后要写开篇记录，可以直接新建一篇 Markdown，例如：
-
-```text
-src/content/blog/20260526-opening-note.md
-```
-
 正文写在 frontmatter 后面，正常使用 Markdown 即可：
 
 ```md
 今天开始把一些项目、学习和阶段性想法留在这里。
-
-[查看日志页](/logs/)
 ```
 
 ## 页面连接
@@ -71,7 +61,6 @@ src/content/blog/20260526-opening-note.md
 站内链接直接使用相对路径：
 
 ```md
-[日志页](/logs/)
 [归档页](/archive/)
 [某篇文章](/blog/20260526-my-first-post/)
 ```

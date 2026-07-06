@@ -9,7 +9,7 @@ const entries = (await getCollection('blog'))
 	.filter((entry) => !entry.data.draft)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const articles = entries.filter((entry) => entry.data.kind === 'article');
+const articles = entries;
 ---
 
 <!doctype html>

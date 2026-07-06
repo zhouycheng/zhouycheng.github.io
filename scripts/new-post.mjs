@@ -128,15 +128,6 @@ async function promptDate() {
 	}
 }
 
-async function promptKind() {
-	while (true) {
-		const value = (await ask('类型 (article/log，默认 log): ')).trim().toLowerCase();
-		if (value === '') return 'log';
-		if (value === 'article' || value === 'log') return value;
-		console.log('类型只能是 article 或 log。');
-	}
-}
-
 async function fileExists(filePath) {
 	try {
 		await access(filePath);
@@ -150,7 +141,6 @@ async function main() {
 	const title = await promptRequired('标题');
 	const description = await promptRequired('摘要');
 	const date = await promptDate();
-	const kind = await promptKind();
 	const slugInput = (
 		await ask(`文件名标题 (可空，默认 ${slugify(title)}): `)
 	).trim();
@@ -162,7 +152,7 @@ async function main() {
 		throw new Error(`文件已存在：${path.relative(rootDir, filePath)}`);
 	}
 
-	const content = `---\ntitle: ${yamlString(title)}\ndescription: ${yamlString(description)}\npubDate: ${date.dashed}\nkind: ${kind}\ndraft: false\n---\n\n`;
+	const content = `---\ntitle: ${yamlString(title)}\ndescription: ${yamlString(description)}\npubDate: ${date.dashed}\ndraft: false\n---\n\n`;
 
 	await mkdir(blogDir, { recursive: true });
 	await writeFile(filePath, content, 'utf8');

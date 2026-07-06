@@ -1,8 +1,8 @@
-# 周耀程的日志
+# 周耀程的博客
 
-独立日志博客，使用 Astro 构建，部署到 GitHub Pages。
+独立博客，使用 Astro 构建，部署到 GitHub Pages。
 
-这个仓库只负责个人日志、技术文章、项目复盘和阶段性思考，不和 JustinView 个人网站混在一起。后续 JustinView 可以通过外链跳转到这里。
+这个仓库只负责技术文章、项目复盘和阶段性思考，不和 JustinView 个人网站混在一起。后续 JustinView 可以通过外链跳转到这里。
 
 ## 本地开发
 
@@ -19,7 +19,7 @@ http://localhost:4321
 
 ## 写文章
 
-文章和日志都放在：
+文章放在：
 
 ```text
 src/content/blog/
@@ -37,7 +37,7 @@ src/content/blog/20260524-my-first-post.md
 npm run new
 ```
 
-脚本会要求输入标题、摘要、日期和类型。摘要会写入页面元信息，供搜索引擎和分享卡片读取。
+脚本会要求输入标题、摘要和日期。摘要会写入页面元信息，供搜索引擎和分享卡片读取。
 
 文章模板：
 
@@ -46,25 +46,10 @@ npm run new
 title: 标题
 description: 简短摘要
 pubDate: 2026-05-24
-kind: article
 draft: false
 ---
 
 正文内容。
-```
-
-日志模板：
-
-```md
----
-title: 标题
-description: 简短摘要
-pubDate: 2026-05-24
-kind: log
-draft: false
----
-
-日志内容。
 ```
 
 ## 构建

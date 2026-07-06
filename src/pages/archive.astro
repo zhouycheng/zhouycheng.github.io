@@ -6,7 +6,7 @@ import SiteShell from '../components/SiteShell.astro';
 import { SITE_TITLE } from '../consts';
 
 const posts = (await getCollection('blog'))
-	.filter((entry) => !entry.data.draft && entry.data.kind === 'article')
+	.filter((entry) => !entry.data.draft)
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const groupedPosts = posts.reduce<Record<string, typeof posts>>((groups, post) => {
